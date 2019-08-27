@@ -5,11 +5,7 @@
 # extension, and its member function documentation is automatically incorporated
 # there as needed.
 
-from validator_collection import validators
-try:
-    import simplejson as json
-except ImportError:
-    import json
+from validator_collection import validators, checkers
 
 
 class LocationScore(object):
@@ -91,6 +87,37 @@ class LocationScore(object):
 
         self.property_page_link = property_page_link
 
+    def __repr__(self):
+        return ("LocationScore(address = '{}',"
+                " original_latitude = {},"
+                " original_longitude = {})".format(self.address,
+                                                   self.original_latitude,
+                                                   self.original_longitude))
+
+    def __str__(self):
+        return "LocationScore(address = '{}')".format(self.address)
+
+    def __eq__(self, other):
+        if isinstance(other, LocationScore):
+            other = other.to_dict(api_compatible = False)
+
+        if isinstance(other, dict):
+            dict_form = self.to_dict(api_compatible = False)
+            if checkers.are_dicts_equivalent(dict_form, other):
+                return True
+
+            dict_form = self.to_dict(api_compatible = True)
+            if checkers.are_dicts_equivalent(dict_form, other):
+                return True
+
+        return False
+
+    def __bool__(self):
+        if self.status is not None or self.status != 1:
+            return True
+
+        return False
+
     @property
     def status(self):
         """Status Code of the result.
@@ -126,7 +153,10 @@ class LocationScore(object):
 
     @walk_score.setter
     def walk_score(self, value):
-        self._walk_score = validators.integer(value, allow_empty = True)
+        self._walk_score = validators.integer(value,
+                                              allow_empty = True,
+                                              minimum = 0,
+                                              maximum = 100)
 
     @property
     def walk_description(self):
@@ -176,7 +206,10 @@ class LocationScore(object):
 
     @transit_score.setter
     def transit_score(self, value):
-        self._transit_score = validators.integer(value, allow_empty = True)
+        self._transit_score = validators.integer(value,
+                                                 allow_empty = True,
+                                                 minimum = 0,
+                                                 maximum = 100)
 
     @property
     def transit_description(self):
@@ -214,7 +247,10 @@ class LocationScore(object):
 
     @bike_score.setter
     def bike_score(self, value):
-        self._bike_score = validators.integer(value, allow_empty = True)
+        self._bike_score = validators.integer(value,
+                                              allow_empty = True,
+                                              minimum = 0,
+                                              maximum = 100)
 
     @property
     def bike_description(self):
@@ -223,6 +259,10 @@ class LocationScore(object):
         :rtype: :class:`str <python:str>`
         """
         return self._bike_description
+
+    @bike_description.setter
+    def bike_description(self, value):
+        self._bike_description = validators.string(value, allow_empty = True)
 
     @property
     def logo_url(self):
@@ -234,7 +274,7 @@ class LocationScore(object):
 
     @logo_url.setter
     def logo_url(self, value):
-        self._logo_url = valiidators.url(value, allow_empty = True)
+        self._logo_url = validators.url(value, allow_empty = True)
 
     @property
     def more_info_icon(self):
@@ -491,7 +531,7 @@ class LocationScore(object):
 
             result.property_page_link = obj.get('property_page_link', None)
 
-        else:
+        elif obj:
             result.walk_score = obj.get('walkscore', None)
             result.walk_description = obj.get('description', None)
             result.walk_updated = obj.get('updated', None)
@@ -501,20 +541,21 @@ class LocationScore(object):
 
             result.property_page_link = obj.get('ws_link', None)
 
-        result.status = obj.get('status', None)
+        if obj:
+            result.status = obj.get('status', None)
 
-        result.transit_score = obj.get('transit', {}).get('score', None)
-        result.transit_description = obj.get('transit',
-                                             {}).get('description', None)
-        result.transit_summary = obj.get('transit', {}).get('summary', None)
+            result.transit_score = obj.get('transit', {}).get('score', None)
+            result.transit_description = obj.get('transit',
+                                                 {}).get('description', None)
+            result.transit_summary = obj.get('transit', {}).get('summary', None)
 
-        result.bike_score = obj.get('bike', {}).get('score', None)
-        result.bike_description = obj.get('bike', {}).get('description', None)
+            result.bike_score = obj.get('bike', {}).get('score', None)
+            result.bike_description = obj.get('bike', {}).get('description', None)
 
-        result.logo_url = obj.get('logo_url', None)
-        result.more_info_icon = obj.get('more_info_icon', None)
-        result.more_info_link = obj.get('more_info_link', None)
-        result.help_link = obj.get('help_link', None)
+            result.logo_url = obj.get('logo_url', None)
+            result.more_info_icon = obj.get('more_info_icon', None)
+            result.more_info_link = obj.get('more_info_link', None)
+            result.help_link = obj.get('help_link', None)
 
         return result
 
@@ -534,8 +575,7 @@ class LocationScore(object):
         :returns: :class:`LocationScore` representation of ``obj``.
         :rtype: :class:`LocationScore`
         """
-        obj = validators.json(value,
-                              allow_empty = True,
-                              json_serializer = json.loads)
+        obj = validators.json(obj,
+                              allow_empty = True)
 
         return cls.from_dict(obj, api_compatible = api_compatible)
