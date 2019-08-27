@@ -124,11 +124,7 @@ WalkScore APIs, or initialize a single object for each API:
 
   api_key = 'YOUR API KEY GOES HERE'
 
-  score_api = ScoreAPI(api_key = api_key)
-
-  walkscore = WalkScore(api_key = api_key)
-  transitscore = TransitScore(api_key = api_key)
-  bikescore = BikeScore(api_key = api_key)
+  walkscore_api = WalkScoreAPI(api_key = api_key)
 
 3. Retrieve a Score
 =============================
@@ -137,14 +133,7 @@ WalkScore APIs, or initialize a single object for each API:
 
   address = '123 Anyplace St Anywhere, AK 12345'
 
-  all_results = score_api.get(address)
-  walk_score_result = score_api.walk(address)
-  transit_score_result = score_api.transit(address)
-  bike_score_result = score_api.bike(address)
-
-  walk_result = walkscore.get(address)
-  transit_result = transitscore.get(address)
-  bike_result = bikescore.get(address)
+  result = walkscore_api.get_score(address)
 
 --------------
 
