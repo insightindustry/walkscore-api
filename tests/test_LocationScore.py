@@ -267,6 +267,10 @@ def test_LocationScore_to_dict(arguments, api_compatible, expected_result, error
 
     if not error:
         assert result is not None
+        print('result:')
+        print(result)
+        print('expected:')
+        print(expected_result)
         assert checkers.are_dicts_equivalent(result, expected_result) is True
 
 
