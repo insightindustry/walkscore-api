@@ -58,6 +58,14 @@ WalkScore API
 WalkScores, TransitScores, and BikeScores from the API within your Python code
 in Python versions 3.7 and higher.
 
+.. warning::
+
+  The **WalkScore Library** is completely unaffiliated with
+  `WalkScore <http://www.walkscore.com>`_. It is entirely unofficial and was
+  developed based on publicly available documentation of the WalkScore APIs
+  published to the WalkScore website. Use of WalkScore is subject to WalkScore's
+  licenses and terms of service, and this library is not endorsed by WalkScore
+  or any affiliates thereof.
 
 **COMPLETE DOCUMENTATION:** http://walkscore-api.readthedocs.org/en/latest/index.html
 
@@ -133,7 +141,7 @@ WalkScore APIs, or initialize a single object for each API:
 
   address = '123 Anyplace St Anywhere, AK 12345'
 
-  result = walkscore_api.get_score(address)
+  result = walkscore_api.get_score(latitude = 123.45, longitude = 54.321, address = address)
 
 --------------
 

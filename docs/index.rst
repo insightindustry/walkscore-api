@@ -4,18 +4,10 @@
    contain the root `toctree` directive.
 
 ####################################################
-WalkScore API
+The WalkScore Library
 ####################################################
 
 **(Unofficial) Python Bindings for the WalkScore API**
-
-.. |strong| raw:: html
-
-<strong>
-
-.. |/strong| raw:: html
-
-</strong>
 
 .. sidebar:: Version Compatability
 
@@ -26,27 +18,36 @@ WalkScore API
 .. include:: _unit_tests_code_coverage.rst
 
 .. toctree::
-:hidden:
-:maxdepth: 3
-:caption: Contents:
+  :hidden:
+  :maxdepth: 3
+  :caption: Contents:
 
-Home <self>
-Quickstart: Patterns and Best Practices <quickstart>
-Using WalkScore <using>
-API Reference <api>
-Error Reference <errors>
-Contributor Guide <contributing>
-Testing Reference <testing>
-Release History <history>
-Glossary <glossary>
-License <license>
+  Home <self>
+  Quickstart: Patterns and Best Practices <quickstart>
+  API Reference <api>
+  Error Reference <errors>
+  Contributor Guide <contributing>
+  Testing Reference <testing>
+  Release History <history>
+  Glossary <glossary>
+  License <license>
 
-**WalkScore** is a Python library that provides Python bindings for the
+The **WalkScore Library** is a Python library that provides Python bindings for the
 `WalkScore API <https://www.walkscore.com/>`_. It enables you to retrieve
-WalkScores, TransitScores, and BikeScores from the API within your Python code.
+:term:`WalkScores <WalkScore>`, :term:`TransitScores <TransitScore>`, and
+:term:`BikeScores <BikeScore>` from the API within your Python code.
+
+.. warning::
+
+  The **WalkScore Library** is completely unaffiliated with
+  `WalkScore <http://www.walkscore.com>`_. It is entirely unofficial and was
+  developed based on publicly available documentation of the WalkScore APIs
+  published to the WalkScore website. Use of WalkScore is subject to WalkScore's
+  licenses and terms of service, and this library is not endorsed by WalkScore
+  or any affiliates thereof.
 
 .. contents::
- :depth: 3
+ :depth: 2
  :backlinks: entry
 
 -----------------
@@ -67,10 +68,12 @@ Dependencies
 Key WalkScore Features
 ========================
 
-* Python representation of WalkScores, TransitScores, and BikeScores.
+* Python representation of :term:`WalkScores <WalkScore>`,
+  :term:`TransitScores <TransitScore>`, and :term:`BikeScores <BikeScore>`
 * Easy serialization and deserialization of API responses to Python objects,
-  :class:`dict <python:dict>` objects or JSON
-* Built-in back-off/retry logic if the WalkScore API is unstable at any mometn in time
+  :class:`dict <python:dict>` objects or :term:`JSON`
+* Built-in back-off/retry logic if the WalkScore API is unstable at any moment
+  in time
 * Robust error handling to surface meaningful information to help you debug your
   code.
 
@@ -85,7 +88,7 @@ Hello, World and Basic Usage
 
 .. code-block:: python
 
-  from walkscore import ScoreAPI, WalkScore, TransitScore, BikeScore
+  from walkscore import WalkScoreAPI
 
 2. Initialize the API
 ============================
@@ -97,11 +100,7 @@ WalkScore APIs, or initialize a single object for each API:
 
   api_key = 'YOUR API KEY GOES HERE'
 
-  score_api = ScoreAPI(api_key = api_key)
-
-  walkscore = WalkScore(api_key = api_key)
-  transitscore = TransitScore(api_key = api_key)
-  bikescore = BikeScore(api_key = api_key)
+  score_api = WalkScoreAPI(api_key = api_key)
 
 3. Retrieve a Score
 =============================
@@ -110,14 +109,7 @@ WalkScore APIs, or initialize a single object for each API:
 
   address = '123 Anyplace St Anywhere, AK 12345'
 
-  all_results = score_api.get(address)
-  walk_score_result = score_api.walk(address)
-  transit_score_result = score_api.transit(address)
-  bike_score_result = score_api.bike(address)
-
-  walk_result = walkscore.get(address)
-  transit_result = transitscore.get(address)
-  bike_result = bikescore.get(address)
+  result = score_api.get_score(address, longitude = 123.45, latitude = 54.321)
 
 --------------
 

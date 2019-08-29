@@ -23,7 +23,7 @@ This means that it will be handled just like a normal exception in unit test
 frameworks, logging solutions, and other tools that might need that information.
 
 
-SQLAthanor Errors
+WalkScore Errors
 ===================
 
 WalkScoreError (from :class:`ValueError <python:ValueError>`)
@@ -39,3 +39,64 @@ AuthenticationError (from :class:`WalkScoreError`)
 .. autoclass:: AuthenticationError
 
 ----------------
+
+InternalAPIError (from :class:`WalkScoreError`)
+--------------------------------------------------------------------
+
+.. autoclass:: InternalAPIError
+
+----------------
+
+BlockedIPError (from :class:`WalkScoreError`)
+--------------------------------------------------------------------
+
+.. autoclass:: BlockedIPError
+
+----------------
+
+QuotaError (from :class:`WalkScoreError`)
+--------------------------------------------------------------------
+
+.. autoclass:: QuotaError
+
+----------------
+
+ScoreInProgressError (from :class:`WalkScoreError`)
+--------------------------------------------------------------------
+
+.. autoclass:: ScoreInProgressError
+
+----------------
+
+InvalidCoordinatesError (from :class:`WalkScoreError`)
+--------------------------------------------------------------------
+
+.. autoclass:: InvalidCoordinatesError
+
+----------------
+
+BindingError (from :class:`WalkScoreError`)
+--------------------------------------------------------------------
+
+.. autoclass:: BindingError
+
+----------------
+
+HTTPConnectionError (from :class:`WalkScoreError`)
+--------------------------------------------------------------------
+
+.. autoclass:: HTTPConnectionError
+
+----------------
+
+HTTPTimeoutError (from :class:`HTTPConnectionError`)
+--------------------------------------------------------------------
+
+.. autoclass:: HTTPTimeoutError
+
+----------------
+
+SSLError (from :class:`WalkScoreError`)
+--------------------------------------------------------------------
+
+.. autoclass:: SSLError

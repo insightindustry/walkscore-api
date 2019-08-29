@@ -13,7 +13,7 @@ class WalkScoreError(ValueError):
     """
     pass
 
-class InternalAPIError(ValueError):
+class InternalAPIError(WalkScoreError):
     """Internal error within the WalkScore API itself. Inherits from
     :class:`WalkScoreError`.
     """

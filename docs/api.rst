@@ -20,6 +20,9 @@ WalkScoreAPI
 
 ------------------------
 
+LocationScore
+------------------------
+
 .. module:: walkscore.locationscore
 
 .. autoclass:: LocationScore
@@ -28,10 +31,11 @@ WalkScoreAPI
 
 ------------------------
 
+HTTPClient
+------------------------
+
 .. module:: walkscore.http_client
 
 .. autoclass:: HTTPClient
    :members:
    :inherited-members:
-
-------------------------
