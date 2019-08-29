@@ -20,14 +20,17 @@ except ImportError:
     import json
 
 from validator_collection import checkers
-from dotenv import load_dotenv
 
 from tests.fixtures import input_files, check_input_file
 from walkscore.api import WalkScoreAPI
 from walkscore.locationscore import LocationScore
 from walkscore import errors
 
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 DEFAULT_API_KEY = os.getenv('TEST_API_KEY', None)
 
