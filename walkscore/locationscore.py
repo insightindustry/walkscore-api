@@ -113,10 +113,10 @@ class LocationScore(object):
         return False
 
     def __bool__(self):
-        if self.status is not None or self.status != 1:
-            return True
+        if not self.status or self.status != 1:
+            return False
 
-        return False
+        return True
 
     @property
     def status(self):
