@@ -22,13 +22,15 @@ from validator_collection import checkers
 from tests.fixtures import input_files, check_input_file
 from walkscore.locationscore import LocationScore
 
+RUNTIME_DATETIME = datetime.datetime.now()
+
 
 @pytest.mark.parametrize('arguments, error', [
     (None, None),
     ({
          'walk_score': 12,
          'walk_description': 'Test Description!',
-         'walk_updated': datetime.datetime.now(),
+         'walk_updated': RUNTIME_DATETIME,
          'transit_score': 34,
          'transit_description': 'Test Description!',
          'transit_summary': 'Test Summary!',
@@ -82,7 +84,7 @@ from walkscore.locationscore import LocationScore
     ({
          'walk_score': 12,
          'walk_description': 'Test Description!',
-         'walk_updated': datetime.datetime.now(),
+         'walk_updated': RUNTIME_DATETIME,
          'transit_score': 34,
          'transit_description': 'Test Description!',
          'transit_summary': 'Test Summary!',
@@ -168,7 +170,7 @@ def test_LocationScore__init__(arguments, error):
     ({
          'walk_score': 12,
          'walk_description': 'Test Description!',
-         'walk_updated': datetime.datetime.now(),
+         'walk_updated': RUNTIME_DATETIME,
          'transit_score': 34,
          'transit_description': 'Test Description!',
          'transit_summary': 'Test Summary!',
@@ -187,7 +189,7 @@ def test_LocationScore__init__(arguments, error):
           'walk': {
               'score': 12,
               'description': 'Test Description!',
-              'updated': datetime.datetime.now()
+              'updated': RUNTIME_DATETIME
           },
           'transit': {
               'score': 34,
@@ -216,7 +218,7 @@ def test_LocationScore__init__(arguments, error):
     ({
          'walk_score': 12,
          'walk_description': 'Test Description!',
-         'walk_updated': datetime.datetime.now(),
+         'walk_updated': RUNTIME_DATETIME,
          'transit_score': 34,
          'transit_description': 'Test Description!',
          'transit_summary': 'Test Summary!',
@@ -234,7 +236,7 @@ def test_LocationScore__init__(arguments, error):
           'status': None,
           'walkscore': 12,
           'description': 'Test Description!',
-          'updated': datetime.datetime.now(),
+          'updated': RUNTIME_DATETIME,
           'transit': {
               'score': 34,
               'description': 'Test Description!',
@@ -271,6 +273,10 @@ def test_LocationScore_to_dict(arguments, api_compatible, expected_result, error
         print(result)
         print('expected:')
         print(expected_result)
+        if result.get('updated', None) != expected_result.get('updated', None):
+            result['updated'] = 123
+            expected_result['updated'] = 123
+
         assert checkers.are_dicts_equivalent(result, expected_result) is True
 
 
@@ -343,7 +349,7 @@ def test_LocationScore_to_dict(arguments, api_compatible, expected_result, error
           'status': None,
           'walkscore': 12,
           'description': 'Test Description!',
-          'updated': datetime.datetime.now(),
+          'updated': RUNTIME_DATETIME,
           'transit': {
               'score': 34,
               'description': 'Test Description!',
@@ -365,7 +371,7 @@ def test_LocationScore_to_dict(arguments, api_compatible, expected_result, error
           'status': None,
           'walkscore': 12,
           'description': 'Test Description!',
-          'updated': datetime.datetime.now(),
+          'updated': RUNTIME_DATETIME,
           'transit': {
               'score': 34,
               'description': 'Test Description!',
@@ -400,6 +406,10 @@ def test_LocationScore_from_dict(obj, api_compatible, error):
         roundtrip_result = LocationScore.from_dict(serialized_result,
                                                    api_compatible = api_compatible)
         roundtrip_serialization = roundtrip_result.to_dict(api_compatible = api_compatible)
+
+        if serialized_result.get('updated', None) != roundtrip_serialization.get('updated', None):
+            serialized_result['updated'] = 123
+            roundtrip_serialization['updated'] = 123
 
         assert checkers.are_dicts_equivalent(roundtrip_serialization,
                                              serialized_result) is True
@@ -474,7 +484,7 @@ def test_LocationScore_from_dict(obj, api_compatible, error):
           'status': None,
           'walkscore': 12,
           'description': 'Test Description!',
-          'updated': datetime.datetime.now(),
+          'updated': RUNTIME_DATETIME,
           'transit': {
               'score': 34,
               'description': 'Test Description!',
@@ -496,7 +506,7 @@ def test_LocationScore_from_dict(obj, api_compatible, error):
           'status': None,
           'walkscore': 12,
           'description': 'Test Description!',
-          'updated': datetime.datetime.now(),
+          'updated': RUNTIME_DATETIME,
           'transit': {
               'score': 34,
               'description': 'Test Description!',
@@ -540,6 +550,10 @@ def test_LocationScore_from_json(obj, api_compatible, error):
                                                    api_compatible = api_compatible)
         roundtrip_serialization = roundtrip_result.to_dict(api_compatible = api_compatible)
 
+        if serialized_result.get('updated', None) != roundtrip_serialization.get('updated', None):
+            serialized_result['updated'] = 123
+            roundtrip_serialization['updated'] = 123
+
         assert checkers.are_dicts_equivalent(roundtrip_serialization,
                                              serialized_result) is True
 
@@ -549,7 +563,7 @@ def test_LocationScore_from_json(obj, api_compatible, error):
     ({
          'walk_score': 12,
          'walk_description': 'Test Description!',
-         'walk_updated': datetime.datetime.now(),
+         'walk_updated': RUNTIME_DATETIME,
          'transit_score': 34,
          'transit_description': 'Test Description!',
          'transit_summary': 'Test Summary!',
@@ -580,7 +594,7 @@ def test_LocationScore__repr__(arguments, expected_result):
     ({
          'walk_score': 12,
          'walk_description': 'Test Description!',
-         'walk_updated': datetime.datetime.now(),
+         'walk_updated': RUNTIME_DATETIME,
          'transit_score': 34,
          'transit_description': 'Test Description!',
          'transit_summary': 'Test Summary!',
@@ -615,7 +629,7 @@ def test_LocationScore__str__(arguments, expected_result):
     ({
          'walk_score': 12,
          'walk_description': 'Test Description!',
-         'walk_updated': datetime.datetime.now(),
+         'walk_updated': RUNTIME_DATETIME,
          'transit_score': 34,
          'transit_description': 'Test Description!',
          'transit_summary': 'Test Summary!',
@@ -632,7 +646,7 @@ def test_LocationScore__str__(arguments, expected_result):
     }, {
          'walk_score': 12,
          'walk_description': 'Test Description!',
-         'walk_updated': datetime.datetime.now(),
+         'walk_updated': RUNTIME_DATETIME,
          'transit_score': 34,
          'transit_description': 'Test Description!',
          'transit_summary': 'Test Summary!',
@@ -650,7 +664,7 @@ def test_LocationScore__str__(arguments, expected_result):
     ({
          'walk_score': 12,
          'walk_description': 'Test Description!',
-         'walk_updated': datetime.datetime.now(),
+         'walk_updated': RUNTIME_DATETIME,
          'transit_score': 34,
          'transit_description': 'Test Description!',
          'transit_summary': 'Test Summary!',
@@ -667,7 +681,7 @@ def test_LocationScore__str__(arguments, expected_result):
     }, {
          'walk_score': 12,
          'walk_description': 'Different description!!',
-         'walk_updated': datetime.datetime.now(),
+         'walk_updated': RUNTIME_DATETIME,
          'transit_score': 34,
          'transit_description': 'Test Description!',
          'transit_summary': 'Test Summary!',
@@ -704,7 +718,7 @@ def test_LocationScore__eq__(arguments1, arguments2, expected_result):
     ({
          'status': 1,
          'walk_description': 'Test Description!',
-         'walk_updated': datetime.datetime.now(),
+         'walk_updated': RUNTIME_DATETIME,
          'transit_score': 34,
          'transit_description': 'Test Description!',
          'transit_summary': 'Test Summary!',
@@ -722,7 +736,7 @@ def test_LocationScore__eq__(arguments1, arguments2, expected_result):
     ({
          'status': 30,
          'walk_description': 'Test Description!',
-         'walk_updated': datetime.datetime.now(),
+         'walk_updated': RUNTIME_DATETIME,
          'transit_score': 34,
          'transit_description': 'Test Description!',
          'transit_summary': 'Test Summary!',
@@ -740,7 +754,7 @@ def test_LocationScore__eq__(arguments1, arguments2, expected_result):
     ({
          'status': None,
          'walk_description': 'Test Description!',
-         'walk_updated': datetime.datetime.now(),
+         'walk_updated': RUNTIME_DATETIME,
          'transit_score': 34,
          'transit_description': 'Test Description!',
          'transit_summary': 'Test Summary!',
