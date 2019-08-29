@@ -54,15 +54,20 @@ def test__init__(use_key_from_env, api_key_override):
         assert result.api_key == api_key
 
 
-@pytest.mark.parametrize('use_key_from_env, api_key_override, address, longitude_latitude, expected_status, error', [
-    (True, None, '1119 8th Avenue Seattle, WA 98101', (-122.3295, 47.6085), 1, None),
-    (True, None, '1119 8th Avenue Seattle, WA 98101', None, 30, errors.InvalidCoordinatesError),
-    (True, None, '1119 8th Avenue Seattle, WA 98101', (-122.3295, None), 30, errors.InvalidCoordinatesError),
-    (True, None, None, (-122.3295, 47.6085), 1, None),
-    (False, None, '1119 8th Avenue Seattle, WA 98101', (-122.3295, 47.6085), 1, errors.AuthenticationError),
-    (False, 'invalid api key', '1119 8th Avenue Seattle, WA 98101', (-122.3295, 47.6085), 1, errors.AuthenticationError),
+@pytest.mark.parametrize('use_key_from_env, api_key_override, address, longitude_latitude, return_transit_score, return_bike_score, expected_status, error', [
+    (True, None, '1119 8th Avenue Seattle, WA 98101', (-122.3295, 47.6085), True, True, 1, None),
+    (True, None, '1119 8th Avenue Seattle, WA 98101', None, True, True, 30, TypeError),
+    (True, None, '1119 8th Avenue Seattle, WA 98101', (-122.3295, None), True, True, 30, errors.InvalidCoordinatesError),
+    (True, None, None, (-122.3295, 47.6085), True, True, 1, None),
+    (False, None, '1119 8th Avenue Seattle, WA 98101', (-122.3295, 47.6085), True, True, 1, errors.AuthenticationError),
+    (False, 'invalid api key', '1119 8th Avenue Seattle, WA 98101', (-122.3295, 47.6085), True, True, 1, errors.AuthenticationError),
+
+    (True, None, '1119 8th Avenue Seattle, WA 98101', (-122.3295, 47.6085), True, False, 1, None),
+    (True, None, '1119 8th Avenue Seattle, WA 98101', (-122.3295, 47.6085), False, True, 1, None),
+    (True, None, '1119 8th Avenue Seattle, WA 98101', (-122.3295, 47.6085), False, False, 1, None),
+
 ])
-def test_get_score(use_key_from_env, api_key_override, address, longitude_latitude, expected_status, error):
+def test_get_score(use_key_from_env, api_key_override, address, longitude_latitude, return_transit_score, return_bike_score, expected_status, error):
     if api_key_override:
         api_key = api_key_override
     elif use_key_from_env:
@@ -74,17 +79,22 @@ def test_get_score(use_key_from_env, api_key_override, address, longitude_latitu
 
     if not error:
         if longitude_latitude:
-            result = api.get_score(address = address,
-                                   latitude = longitude_latitude[1],
-                                   longitude = longitude_latitude[0])
+            result = api.get_score(latitude = longitude_latitude[1],
+                                   longitude = longitude_latitude[0],
+                                   address = address,
+                                   return_transit_score = return_transit_score,
+                                   return_bike_score = return_bike_score)
+
         else:
             result = api.get_score(address = address)
     else:
         with pytest.raises(error):
             if longitude_latitude:
-                result = api.get_score(address = address,
-                                       latitude = longitude_latitude[1],
-                                       longitude = longitude_latitude[0])
+                result = api.get_score(latitude = longitude_latitude[1],
+                                       longitude = longitude_latitude[0],
+                                       address = address,
+                                       return_transit_score = return_transit_score,
+                                       return_bike_score = return_bike_score)
             else:
                 result = api.get_score(address = address)
 
@@ -92,3 +102,16 @@ def test_get_score(use_key_from_env, api_key_override, address, longitude_latitu
         assert result is not None
         assert isinstance(result, LocationScore) is True
         assert result.status == expected_status
+        assert result.walk_score is not None
+        assert checkers.is_numeric(result.walk_score) is True
+
+        if return_transit_score:
+            assert result.transit_score is not None
+            assert checkers.is_numeric(result.transit_score) is True
+        else:
+            assert result.transit_score is None
+        if return_bike_score:
+            assert result.bike_score is not None
+            assert checkers.is_numeric(result.bike_score) is True
+        else:
+            assert result.bike_score is None

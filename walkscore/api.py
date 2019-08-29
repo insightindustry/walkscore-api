@@ -141,26 +141,26 @@ class WalkScoreAPI(object):
         return self._BASE_URL + self._SCORE_ENDPOINT
 
     def get_score(self,
+                  latitude,
+                  longitude,
                   address = None,
-                  latitude = None,
-                  longitude = None,
                   return_transit_score = True,
                   return_bike_score = True,
                   max_retries = None):
               """Retrieve the :term:`WalkScore`, :term:`TransitScore`, and/or
               :term:`BikeScore` for a given location from the WalkScore API.
 
+              :param latitude: The latitude of the location whose score(s) should
+                be retrieved.
+              :type latitude: numeric
+
+              :param longitude: The longitude of the location whose score(s) should
+                be retrieved.
+              :type longitude: numeric
+
               :param address: The address whose score(s) should be retrieved.
                 Defaults to :obj:`None <python:None>`.
               :type address: :class:`str <python:str>` / :obj:`None <python:None>`
-
-              :param latitutde: The latitude of the location whose score(s) should
-                be retrieved. Defaults to :obj:`None <python:None>`.
-              :type latitude: numeric / :obj:`None <python:None>`
-
-              :param longitude: The longitude of the location whose score(s) should
-                be retrieved. Defaults to :obj:`None <python:None>`.
-              :type longitude: numeric / :obj:`None <python:None>`
 
               :param return_transit_score: If ``True``, will
                 return the location's :term:`TransitScore`. Defaults to
