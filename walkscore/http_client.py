@@ -716,10 +716,14 @@ class Urllib2Client(HTTPClient):
             rbody = response.read()
             rcode = response.code
             response_headers = dict(response.info())
+            if hasattr(response, 'close'):
+                response.close()
         except urllib.error.HTTPError as error:
             rcode = error.code
             rbody = error.read()
             response_headers = dict(error.info())
+            if hasattr(error, 'close'):
+                error.close()
         except (urllib.error.URLError, ValueError) as error:
             WalkScoreError.from_exception(error)
 

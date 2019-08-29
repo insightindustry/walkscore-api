@@ -62,9 +62,16 @@ def check_for_errors(response, status_code, headers):
 
     """
     status_code = validators.integer(status_code, allow_empty = False)
-    json_response = validators.json(response, allow_empty = True)
+    try:
+        json_response = validators.json(response, allow_empty = True)
+    except ValueError:
+        if isinstance(response, bytes):
+            response = response.decode('utf-8')
+            
+        json_response = validators.json(response, allow_empty = True)
 
-    status_code, error_type, message = errors.parse_http_error(response)
+    status_code, error_type, message = errors.parse_http_error(status_code,
+                                                               response)
     if not error_type:
         ws_status = json_response.get('status', None)
         error_value = errors.DEFAULT_ERROR_CODES.get(ws_status, None)

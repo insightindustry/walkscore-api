@@ -5,6 +5,8 @@
 # extension, and its member class documentation is automatically incorporated
 # there as needed.
 
+from validator_collection import validators
+
 class WalkScoreError(ValueError):
     """Base error raised by **WalkScore**. Inherits from
     :class:`ValueError <python:ValueError>`.
@@ -65,8 +67,11 @@ class SSLError(WalkScoreError):
     status_code = 495
 
 
-def parse_http_error(http_response):
+def parse_http_error(status_code, http_response):
     """Return the error based on the ``http_response`` received.
+
+    :param status_code: The original status code received.
+    :type status_code: :class:`int <python:int>`
 
     :param http_response: The HTTP response that was retrieved.
 
@@ -76,18 +81,29 @@ def parse_http_error(http_response):
       * the error type received,
       * the error message received
     """
-    status_code = http_response.status_code
+    try:
+        status_code = http_response.status_code
+    except AttributeError:
+        pass
+
     error_type = DEFAULT_ERROR_CODES.get(status_code, None)
     message = None
+
     try:
         response_json = http_response.json()
-        error_type = response_json.get('error_type', error_type)
         message = response_json.get('message', message)
     except ValueError:
         message = http_response.text
+    except AttributeError:
+        try:
+            message = http_response.decode('utf-8')
+        except AttributeError:
+            message = http_response
+
+    if isinstance(error_type, str):
         error_type = ERROR_TYPES.get(error_type, None)
 
-    if not error_type and status_code > 500:
+    if not error_type and status_code >= 500:
         error_type = InternalAPIError
 
     return status_code, error_type, message
@@ -106,8 +122,9 @@ def check_for_errors(status_code, http_response = None):
     :raises WalkScoreError: or a sub-type thereof based on ``status_code``
 
     """
-    status_code, error_type, message = parse_http_error(http_response)
+    status_code, error_type, message = parse_http_error(status_code, http_response)
     if error_type:
+        print(error_type)
         raise error_type(message)
 
     return None

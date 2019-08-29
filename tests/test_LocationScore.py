@@ -2,10 +2,10 @@
 
 """
 ******************************************
-tests.test_locationscore
+tests.test_LocationScore
 ******************************************
 
-Tests for :term:`YAML` serialization/de-serialization support.
+Tests for the :class:`LocationScore` class.
 
 """
 # pylint: disable=line-too-long

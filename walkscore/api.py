@@ -5,11 +5,14 @@
 # extension, and its member function documentation is automatically incorporated
 # there as needed.
 
+import os
+
 from validator_collection import validators
 
 from walkscore.http_client import default_http_client
 from walkscore.locationscore import LocationScore
 from walkscore.utilities import check_for_errors
+from walkscore.errors import AuthenticationError, InvalidCoordinatesError
 
 
 class WalkScoreAPI(object):
@@ -26,7 +29,9 @@ class WalkScoreAPI(object):
         """Instantiate an API instance authentiating with the supplied API key.
 
         :param api_key: The API key provided by WalkScore used to authenticate
-          your application. Defaults to :obj:`None <python:None>`.
+          your application. If :obj:`None <python:None>` or not specified will
+          default to the ``WALKSCORE_API_KEY`` environment variable if present,
+          and :obj:`None <python:None>` if not.
         :type api_key: :class:`str <python:str>` / :obj:`None <python:None>`
 
         :param http_client: The HTTP client instance to use for the execution of requests.
@@ -59,6 +64,9 @@ class WalkScoreAPI(object):
         self._proxy = None
         self._max_retries = None
 
+        if not api_key:
+            api_key = os.getenv('WALKSCORE_API_KEY', None)
+
         self.api_key = api_key
         self.http_client = http_client
         self.proxy = proxy
@@ -74,7 +82,7 @@ class WalkScoreAPI(object):
 
     @api_key.setter
     def api_key(self, value):
-        self._api_key = validators.string(api_key, allow_empty = True)
+        self._api_key = validators.string(value, allow_empty = True)
 
     @property
     def http_client(self):
@@ -188,13 +196,8 @@ class WalkScoreAPI(object):
               if not self.api_key:
                   raise AuthenticationError('No API key supplied.')
 
-              if not address and not (latitude and longitude):
-                  raise InvalidCoordinatesError('No address or coordinates supplied.')
-
-              if address and latitude and not longitude:
-                  latitude = None
-              elif address and longitude and not latitude:
-                  longitude = None
+              if not (latitude and longitude):
+                  raise InvalidCoordinatesError('No coordinates supplied.')
 
               if latitude:
                   latitude = validators.numeric(latitude, allow_empty = False)
@@ -234,7 +237,7 @@ class WalkScoreAPI(object):
                                                       parameters = parameters,
                                                       request_body = None)
 
-              result_set = check_for_errors(response)
+              result_set = check_for_errors(*response)
 
               result = LocationScore.from_json(result_set[0],
                                                api_compatible = True)
