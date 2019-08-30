@@ -48,6 +48,9 @@ matrix:
     - python: '3.6'
       env: TOXENV=coverage
 
+before_install:
+- sudo apt install gnutls
+
 install:
 - pip install -U tox codecov
 script:
