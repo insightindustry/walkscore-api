@@ -39,11 +39,14 @@ matrix:
       before_install:
         - sudo apt-get update
         - sudo apt install libgnutls28-dev
+        - pip uninstall requests
     - python: '3.7'
       dist: xenial
       sudo: true
       env:
         - TOXENV=.python37
+      before_install:
+        - pip uninstall requests
 
 ## PYTHON 3.6 - OTHER TESTS
     - python: '3.6'
