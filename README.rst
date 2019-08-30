@@ -1,5 +1,5 @@
 ####################################################
-WalkScore API
+The WalkScore Library
 ####################################################
 
 **(Unofficial) Python Bindings for the WalkScore API**
@@ -37,7 +37,6 @@ WalkScore API
        .. image:: https://readthedocs.org/projects/walkscore-api/badge/?version=v.1.0.0
          :target: http://walkscore-api.readthedocs.io/en/latest/?badge=v.1.0.0
          :alt: Documentation Status (ReadTheDocs)
-
 
    * - `develop <https://github.com/insightindustry/walkscore-api/tree/develop>`_
      -
@@ -90,7 +89,7 @@ Dependencies
 ==============
 
 .. list-table::
-   :widths: 50 50
+   :widths: 100
    :header-rows: 1
 
    * - Python 3.x
@@ -104,7 +103,7 @@ Key WalkScore Features
 
 * Python representation of WalkScores, TransitScores, and BikeScores.
 * Easy serialization and deserialization of API responses to Python objects,
-  :class:`dict <python:dict>` objects or JSON
+  `dict` objects or JSON
 * Built-in back-off/retry logic if the WalkScore API is unstable at any mometn in time
 * Robust error handling to surface meaningful information to help you debug your
   code.
@@ -151,7 +150,7 @@ WalkScore APIs, or initialize a single object for each API:
 
   # the BikeScore for the location
   result.bike_score
-  
+
 --------------
 
 *********************
@@ -168,7 +167,7 @@ Contributing
 *********************
 
 We welcome contributions and pull requests! For more information, please see the
-:doc:`Contributor Guide <contributing>`
+`Contributor Guide <https://walkscore-api.readthedocs.io/en/latest/contributing.html>`_.
 
 -------------------
 
@@ -180,7 +179,7 @@ We use `TravisCI <http://travisci.org>`_ for our build automation and
 `ReadTheDocs <https://readthedocs.org>`_ for our documentation.
 
 Detailed information about our test suite and how to run tests locally can be
-found in our :doc:`Testing Reference <testing>`.
+found in our `Testing Reference <https://walkscore-api.readthedocs.io/en/latest/testing.html>`_.
 
 --------------------
 
@@ -188,6 +187,5 @@ found in our :doc:`Testing Reference <testing>`.
 License
 **********************
 
-**WalkScore** is made available under an :doc:`MIT License <license>`.
-
-----------------
+**WalkScore** is made available under an
+`MIT License <https://walkscore-api.readthedocs.io/en/latest/license.html>`_.
