@@ -36,6 +36,9 @@ matrix:
       sudo: true
       env:
         - TOXENV=.python37-pycurl
+      before_install:
+        - sudo apt-get update
+        - sudo apt install libgnutls28-dev
     - python: '3.7'
       dist: xenial
       sudo: true
@@ -47,10 +50,6 @@ matrix:
       env: TOXENV=docs
     - python: '3.6'
       env: TOXENV=coverage
-
-before_install:
-  - sudo apt-get update
-  - sudo apt install libgnutls28-dev
 
 install:
 - pip install -U tox codecov
