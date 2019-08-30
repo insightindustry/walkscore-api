@@ -8,7 +8,7 @@ env:
     - PYTHONFAULTHANDLER=x
 
 matrix:
-#  include:
+  include:
 #    - python: '3.6'
 #      env:
 #        - TOXENV=.python36-urlfetch
