@@ -181,7 +181,7 @@ class WalkScoreAPI(object):
 
               :returns: The location's :term:`WalkScore`, :term:`TransitScore`,
                 and :term:`BikeScore` with meta-data.
-              :rtype: :class:`LocationScore`
+              :rtype: :class:`LocationScore <walkscore.locationscore.LocationScore>`
 
               :raises AuthenticationError: if the API key is invalid
               :raises ScoreInProgressError: if the score is being calculated and is not

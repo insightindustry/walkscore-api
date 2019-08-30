@@ -111,8 +111,6 @@ class LocationScore(object):
           the location. Defaults to :obj:`None <python:None>`.
         :type property_page_link: :class:`str <python:str>` / :obj:`None <python:None>`
 
-
-        :param
         """
         self._address = None
         self._status = None

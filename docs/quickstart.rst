@@ -19,7 +19,7 @@ Installation
 Initializing the API
 =======================
 
-To initialize the :class:`WalkScoreAPI <walkscore.WalkScoreAPI>` object all you
+To initialize the :class:`WalkScoreAPI <walkscore.api.WalkScoreAPI>` object all you
 need to do is instantiate it:
 
 .. code-block:: python
@@ -52,7 +52,7 @@ default, the library will look for HTTP libraries in the following order:
 
 There are three ways to customize / configure the HTTP client:
 
-#. Subclass the :class:`HTTP Client <walkscore.http_client.HTTPClient>` class.
+#. Subclass the :class:`HTTPClient <walkscore.http_client.HTTPClient>` class.
 #. Supply a proxy URL.
 #. Configure the maximum number of retries.
 
@@ -100,7 +100,7 @@ Getting Scores
 =======================
 
 To retrieve scores, all you need to do is to call the
-:func:`get_score() <walkscore.WalkScoreAPI.get_score>` method on the initialized API:
+:func:`get_score() <walkscore.api.WalkScoreAPI.get_score>` method on the initialized API:
 
 .. code-block:: python
 
@@ -123,7 +123,7 @@ To retrieve scores, all you need to do is to call the
   want to suppress the calculation / retrieval of
   :term:`TransitScores <TransitScore>` and/or :term:`BikeScores <BikeScore>` if
   you don't need them. To do that, all you need to do is pass the appropriate
-  arguments into the :func:`get_score() <walkscore.WalkScoreAPI.get_score>` method:
+  arguments into the :func:`get_score() <walkscore.api.WalkScoreAPI.get_score>` method:
 
   .. code-block:: python
 
@@ -132,8 +132,8 @@ To retrieve scores, all you need to do is to call the
                                  return_transit_score = False,
                                  return_bike_score = False)
 
-The results returned by the :func:`get_score() <walkscore.WalkScoreAPI.get_score>` method
-are always :class:`LocationScore <walkscore.LocationScore>` instances.
+The results returned by the :func:`get_score() <walkscore.api.WalkScoreAPI.get_score>` method
+are always :class:`LocationScore <walkscore.locationscore.LocationScore>` instances.
 
 ----------------------
 
@@ -147,18 +147,18 @@ reference documentation for more insight into its properties.
 However, there are a number of key serialization / deserialization methods that
 you may find useful:
 
-* :func:`.to_json() <walkscore.LocationScore.to_json>` which returns a JSON representation
+* :func:`.to_json() <walkscore.locationscore.LocationScore.to_json>` which returns a JSON representation
   of the location score, either normalized to a cleaner/more consistent structure
   preferred by the WalkScore Library or mirroring the WalkScore API's JSON
   structure
-* :func:`.from_json() <walkscore.LocationScore.from_json>` which returns a
+* :func:`.from_json() <walkscore.locationscore.LocationScore.from_json>` which returns a
   :class:`LocationScore` instance generated from a JSON string
-* :func:`.to_dict() <walkscore.LocationScore.to_dict>` which returns a
+* :func:`.to_dict() <walkscore.locationscore.LocationScore.to_dict>` which returns a
   :class:`dict <python:dict>` representation fo the location score, either
   normalized to a cleaner/more consistent structure preferred by the WalkScore
   Library or mirroring the WalkScore API's JSON structure
-* :func:`.from_dict() <walkscore.LocationScore.from_dict>` which returns a
-  :class:`LocationScore <walkscore.LocationScore>` instance generated from a
+* :func:`.from_dict() <walkscore.locationscore.LocationScore.from_dict>` which returns a
+  :class:`LocationScore <walkscore.locationscore.LocationScore>` instance generated from a
   :class:`dict <python:dict>`
 
 ------------------------
