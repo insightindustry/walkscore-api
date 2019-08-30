@@ -67,7 +67,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # -- Options for HTML output -------------------------------------------------
 
-autoclass_content = 'class'
+autoclass_content = 'both'
 autodoc_member_order = 'groupwise'
 add_module_names = False
 

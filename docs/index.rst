@@ -11,9 +11,9 @@ The WalkScore Library
 
 .. sidebar:: Version Compatability
 
- **WalkScore** is designed to be compatible with:
+ The **WalkScore Library** is designed to be compatible with:
 
-   * Python 3.7 or higher
+   * Python 3.6 or higher
 
 .. include:: _unit_tests_code_coverage.rst
 
@@ -109,7 +109,16 @@ WalkScore APIs, or initialize a single object for each API:
 
   address = '123 Anyplace St Anywhere, AK 12345'
 
-  result = score_api.get_score(address, longitude = 123.45, latitude = 54.321)
+  result = score_api.get_score(longitude = 123.45, latitude = 54.321, address = address)
+
+  # the WalkScore for the location
+  result.walk_score
+
+  # the TransitScore for the location
+  result.transit_score
+
+  # the BikeScore for the location
+  result.bike_score
 
 --------------
 

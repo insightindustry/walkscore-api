@@ -53,10 +53,10 @@ WalkScore API
          :target: http://walkscore-api.readthedocs.io/en/latest/?badge=develop
          :alt: Documentation Status (ReadTheDocs)
 
-**WalkScore** is a Python library that provides Python bindings for the
+The **WalkScore Library** is a Python library that provides Python bindings for the
 `WalkScore API <https://www.walkscore.com/>`_. It enables you to retrieve
 WalkScores, TransitScores, and BikeScores from the API within your Python code
-in Python versions 3.7 and higher.
+in Python versions 3.6 and higher.
 
 .. warning::
 
@@ -79,7 +79,7 @@ in Python versions 3.7 and higher.
 Installation
 ***************
 
-To install **WalkScore**, just execute:
+To install the **WalkScore Library**, just execute:
 
 .. code:: bash
 
@@ -94,8 +94,8 @@ Dependencies
    :header-rows: 1
 
    * - Python 3.x
-   * - | * `Validator-Collection v1.3.0 <https://github.com/insightindustry/validator-collection>`_ or higher
-       | * `Backoff-Utils v.1.0.0 <https://github.com/insightindustry/backoff-utils>`_ or higher
+   * - | * `Validator-Collection v1.3 <https://github.com/insightindustry/validator-collection>`_ or higher
+       | * `Backoff-Utils v.1.0 <https://github.com/insightindustry/backoff-utils>`_ or higher
 
 -------------
 
@@ -120,7 +120,7 @@ Hello, World and Basic Usage
 
 .. code-block:: python
 
-  from walkscore import ScoreAPI, WalkScore, TransitScore, BikeScore
+  from walkscore import WalkScoreAPI
 
 2. Initialize the API
 ============================
@@ -143,6 +143,15 @@ WalkScore APIs, or initialize a single object for each API:
 
   result = walkscore_api.get_score(latitude = 123.45, longitude = 54.321, address = address)
 
+  # the WalkScore for the location
+  result.walk_score
+
+  # the TransitScore for the location
+  result.transit_score
+
+  # the BikeScore for the location
+  result.bike_score
+  
 --------------
 
 *********************

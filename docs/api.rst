@@ -16,7 +16,6 @@ WalkScoreAPI
 
 .. autoclass:: WalkScoreAPI
   :members:
-  :inherited-members:
 
 ------------------------
 

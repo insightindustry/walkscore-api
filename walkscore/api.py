@@ -26,7 +26,7 @@ class WalkScoreAPI(object):
                  http_client = None,
                  proxy = None,
                  max_retries = None):
-        """Instantiate an API instance authentiating with the supplied API key.
+        """
 
         :param api_key: The API key provided by WalkScore used to authenticate
           your application. If :obj:`None <python:None>` or not specified will
