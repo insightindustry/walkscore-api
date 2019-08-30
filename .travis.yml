@@ -36,7 +36,7 @@ matrix:
       sudo: true
       env:
         - TOXENV=.python37-pycurl
-      before_install:
+      before_script:
         - sudo apt-get update
         - sudo apt install libgnutls28-dev
         - pip uninstall requests
@@ -45,7 +45,7 @@ matrix:
       sudo: true
       env:
         - TOXENV=.python37
-      before_install:
+      before_script:
         - pip uninstall requests
 
 ## PYTHON 3.6 - OTHER TESTS
