@@ -32,7 +32,8 @@ try:
 except ImportError:
     pass
 
-DEFAULT_API_KEY = os.getenv('TEST_API_KEY', 12345)
+print(os.environ)
+DEFAULT_API_KEY = os.getenv('TEST_API_KEY', None)
 
 @pytest.mark.parametrize('use_key_from_env, api_key_override', [
     (True, None),
@@ -75,7 +76,7 @@ def test_get_score(use_key_from_env, api_key_override, address, longitude_latitu
         api_key = api_key_override
     elif use_key_from_env:
         api_key = DEFAULT_API_KEY
-        print('Using Key: %s' % DEFAULT_API_KEY)
+        print('Using DEFAULT_API_KEY')
     else:
         api_key = None
         print('setting API key to None')
