@@ -141,7 +141,7 @@ Working with Scores
 =========================
 
 When the WalkScore Library has retrieved a score for a given set of coordinates,
-you can work with it as any other Python object. See the :class:`LocationScore`
+you can work with it as any other Python object. See the :class:`LocationScore <walkscore.locationscore.LocationScore>`
 reference documentation for more insight into its properties.
 
 However, there are a number of key serialization / deserialization methods that
@@ -152,7 +152,7 @@ you may find useful:
   preferred by the WalkScore Library or mirroring the WalkScore API's JSON
   structure
 * :func:`.from_json() <walkscore.locationscore.LocationScore.from_json>` which returns a
-  :class:`LocationScore` instance generated from a JSON string
+  :class:`LocationScore <walkscore.locationscore.LocationScore>` instance generated from a JSON string
 * :func:`.to_dict() <walkscore.locationscore.LocationScore.to_dict>` which returns a
   :class:`dict <python:dict>` representation fo the location score, either
   normalized to a cleaner/more consistent structure preferred by the WalkScore

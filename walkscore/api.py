@@ -45,9 +45,9 @@ class WalkScoreAPI(object):
           .. tip::
 
             You can override the HTTP client by supplying a
-            :class:`HTTPClient <walkscore.HTTPClient>` instance to the method.
+            :class:`HTTPClient <walkscore.http_client.HTTPClient>` instance to the method.
 
-        :type http_client: :class:`HTTPClient <walkscore.http_client>`
+        :type http_client: :class:`HTTPClient <walkscore.http_client.HTTPClient>`
 
         :param proxy: The URL to use as an HTTP proxy. Defaults to
           :obj:`None <python:None>`.
@@ -89,7 +89,7 @@ class WalkScoreAPI(object):
         """The object instance to use as the HTTP client to make HTTP requests against
         the WalkScore API.
 
-        :rtype: :class:`HTTPClient <walkscore.HTTPClient>`
+        :rtype: :class:`HTTPClient <walkscore.http_client.HTTPClient>`
         """
         if not self._http_client:
             return default_http_client(proxy = self.proxy)
