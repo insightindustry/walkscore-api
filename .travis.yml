@@ -50,7 +50,7 @@ matrix:
 
 before_install:
   - sudo apt-get update
-  - sudo apt install gnutls
+  - sudo apt install libgnutls28-dev
 
 install:
 - pip install -U tox codecov
