@@ -75,8 +75,10 @@ def test_get_score(use_key_from_env, api_key_override, address, longitude_latitu
         api_key = api_key_override
     elif use_key_from_env:
         api_key = DEFAULT_API_KEY
+        print('Using Key: %s' % DEFAULT_API_KEY)
     else:
         api_key = None
+        print('setting API key to None')
 
     api = WalkScoreAPI(api_key = api_key)
 
