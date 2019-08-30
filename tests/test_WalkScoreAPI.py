@@ -32,7 +32,7 @@ try:
 except ImportError:
     pass
 
-DEFAULT_API_KEY = os.getenv('TEST_API_KEY', None)
+DEFAULT_API_KEY = os.getenv('WALKSCORE_TEST_API_KEY', None)
 
 @pytest.mark.parametrize('use_key_from_env, api_key_override', [
     (True, None),

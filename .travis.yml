@@ -8,21 +8,20 @@ env:
     - PYTHONFAULTHANDLER=x
 
 matrix:
-  include:
-    - python: '3.6'
-      env:
-        - TOXENV=.python36-urlfetch
-    - python: '3.6'
-      env:
-        - TOXENV=.python36-requests
-    - python: '3.6'
-      env:
-        - TOXENV=.python36-pycurl
-    - python: '3.6'
-      env:
-        - TOXENV=.python36
+#  include:
+#    - python: '3.6'
+#      env:
+#        - TOXENV=.python36-urlfetch
+#    - python: '3.6'
+#      env:
+#        - TOXENV=.python36-requests
+#    - python: '3.6'
+#      env:
+#        - TOXENV=.python36-pycurl
+#    - python: '3.6'
+#      env:
+#        - TOXENV=.python36
 ## PYTHON 3.7
-## SIMPLEJSON
     - python: '3.7'
       dist: xenial
       sudo: true
