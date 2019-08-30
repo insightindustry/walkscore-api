@@ -25,7 +25,6 @@ class LocationScore(object):
                  transit_summary = None,
                  bike_score = None,
                  bike_description = None,
-                 bike_summary = None,
                  logo_url = None,
                  more_info_icon = None,
                  more_info_link = None,
@@ -33,6 +32,88 @@ class LocationScore(object):
                  snapped_latitude = None,
                  snapped_longitude = None,
                  property_page_link = None):
+        """
+
+        :param address: The address originally supplied to the WalkScore API.
+          Defaults to :obj:`None <python:None>`.
+        :type address: :class:`str <python:str>` / :obj:`None <python:None>`
+
+        :param original_latitude: The latitude value originally supplied to the
+          WalkScore API. Defaults to :obj:`None <python:None>`.
+        :type original_latitude: numeric / :obj:`None <python:None>`
+
+        :param original_longitude: The longitude value originally supplied to the
+          WalkScore API. Defaults to :obj:`None <python:None>`.
+        :type original_longitude: numeric / :obj:`None <python:None>`
+
+        :param status: The status returned from the WalkScore API. Defaults to
+          :obj:`None <python:None>`.
+        :type status: :class:`int <python:int>` / :obj:`None <python:None>`
+
+        :param walk_score: The :term:`WalkScore` for the location. Deafults to
+          :obj:`None <python:None>`
+        :type walk_score: :class:`int <python:int>` / :obj:`None <python:None>`
+
+        :param walk_description: An English characterization of the
+          :term:`WalkScore`, e.g. "Somewhat Walkable". Defaults to
+          :obj:`None <python:None>`.
+        :type walk_description: :class:`str <python:str>` / :obj:`None <python:None>`
+
+        :param walk_updated: The timestamp when the :term:`WalkScore` was
+          calculated. Defaults to :obj:`None <python:None>`
+        :type walk_updated: :class:`datetime <python:datetime.datetime>` / :obj:`None <python:None>`
+
+        :param transit_score: The :term:`TransitScore` for the location. Deafults to
+          :obj:`None <python:None>`
+        :type transit_score: :class:`int <python:int>` / :obj:`None <python:None>`
+
+        :param transit_description: An English characterization of the
+          :term:`TransitScore`, e.g. "Rider's Paradise". Defaults to
+          :obj:`None <python:None>`.
+        :type transit_description: :class:`str <python:str>` / :obj:`None <python:str>`
+
+        :param transit_summary: Notes on the transit options accessible from the
+          location. Defaults to :obj:`None <python:None>`.
+        :type transit_summary: :class:`str <python:str>` / :obj:`None <python:None>`
+
+        :param bike_score: The :term:`BikeScore` for the location. Deafults to
+          :obj:`None <python:None>`
+        :type bike_score: :class:`int <python:int>` / :obj:`None <python:None>`
+
+        :param bike_description: An English characterization of the :term:`BikeScore`,
+          e.g. "Very Bikeable". Defaults to :obj:`None <python:None>`.
+        :type bike_description: :class:`str <python:str>` / :obj:`None <python:None>`
+
+        :param logo_url: The URL of the WalkScore logo. Defaults to :obj:`None <python:None>`.
+        :type logo_url: :class:`str <python:str>` / :obj:`None <python:None>`
+
+        :param more_info_icon: The URL to the icon to use when linking to more
+          information. Defaults to :obj:`None <python:None>`.
+        :type more_info_icon: :class:`str <python:str>` / :obj:`None <python:None>`
+
+        :param more_info_link: The URL to link to when providing more information.
+          Defaults to :obj:`None <python:None>`.
+        :type more_info_link: :class:`str <python:str>` / :obj:`None <python:None>`
+
+        :param help_link: A link to the "How Walk Score Works" page. Defaults to
+          :obj:`None <python:None>`.
+        :type help_link: :class:`str <python:str>` / :obj:`None <python:None>`
+
+        :param snapped_latitude: The latitude for the location, snapped to a grid
+          of approximately 500 ft. by 500 ft. Defaults to :obj:`None <python:None>`.
+        :type snapped_latitude: numeric / :obj:`None <python:None>`
+
+        :param snapped_longitude: The longitude for the location, snapped to a grid
+          of approximately 500 ft. by 500 ft. Defaults to :obj:`None <python:None>`.
+        :type snapped_longitude: numeric / :obj:`None <python:None>`
+
+        :param property_page_link: The URL to the walkscore.com map and score for
+          the location. Defaults to :obj:`None <python:None>`.
+        :type property_page_link: :class:`str <python:str>` / :obj:`None <python:None>`
+
+
+        :param
+        """
         self._address = None
         self._status = None
 
@@ -47,7 +128,6 @@ class LocationScore(object):
 
         self._bike_score = None
         self._bike_description = None
-        self._bike_summary = None
 
         self._logo_url = None
         self._more_info_icon = None
