@@ -20,7 +20,7 @@ matrix:
         - TOXENV=.python36-pycurl
       before_install:
         - sudo apt-get update
-        - sudo apt install libgnutls28-dev
+        - sudo apt install libgnutls28-dev libcurl4-openssl-dev libssl-dev
       before_script:
         - pip uninstall requests -y
     - python: '3.6'
