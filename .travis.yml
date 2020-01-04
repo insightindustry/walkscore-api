@@ -8,25 +8,32 @@ env:
   - secure: Zxhj02mKdnS7ZjHSq1zRPNjw6+7ya2i092gmSaM2/U0lJZEcXV1575SxWT/CCGDE3xsmpoBE/q4KG4pXNaZwZOX1cVCPD8o2pQoDcULi9CtpGyU266tjzHiHL5woF5NRJZjdIujebwz1CGWpRNNMuPRUtCFqHMI1NIbp3BUwxBtfplgZCns9C4kgrxF1H8s7pY6tq8PuNJwox5acdw6gGPyJzZiNXD54Xw1ZlLWa0PYisE71qtDRcQ4KmhAgiJiVKC1iL0Di0As3INKaKCTJfPH3KfwNVVbi9pwB2tA6+aUO7iXtmUkWGhzKaEhSKreTLbSpMsOdfXWPmRkb4+YBK+qtoXd3fOvMQ9MebjvBVCxipOS68H69Q7heMDHctxC2f+tNdXVe731TF5qw+HzmqOKfW/hgXn4uRwPmHDmhFegVW5WTmcLY8J6DikC2PnfSUZx6+xItxR/jjq98fpkmNqQacQfQb6Q4Uv+kA5igwn9AcytL8g6iHi/F9iPPhdhWi5ovAmuDY8bsnxcxxatucjzHEctiZcFuy0qEJoGjb9GwgF6wLdRTHRVXYyHUcWGdkJnK2wmcTa3a4LJNZSh0Y+OUK5MLc1GY1ts9okM01o8k74jBBUVMmPWcfrHIwqdqDJifQX75FY0hfyzjp0BLRW1mvmXpRMy66AOKLdhZ6E8=
 matrix:
   include:
-## PYTHON 3.6
-    - python: '3.6'
+## PYTHON 3.8
+    - python: '3.8'
+      dist: bionic
+      sudo: true
       env:
-        - TOXENV=.python36-urlfetch
-    - python: '3.6'
+        - TOXENV=.python38-urlfetch
+    - python: '3.8'
+      dist: bionic
+      sudo: true
       env:
-        - TOXENV=.python36-requests
-    - python: '3.6'
+        - TOXENV=.python38-requests
+    - python: '3.8'
+      dist: xenial
+      sudo: true
       env:
-        - TOXENV=.python36-pycurl
+        - TOXENV=.python38-pycurl
       before_install:
         - sudo apt-get update
         - sudo apt install libgnutls28-dev
-        - sudo apt install libcurl4-openssl-dev
       before_script:
         - pip uninstall requests -y
-    - python: '3.6'
+    - python: '3.8'
+      dist: bionic
+      sudo: true
       env:
-        - TOXENV=.python36
+        - TOXENV=.python38
       before_script:
         - pip uninstall requests -y
 ## PYTHON 3.7
@@ -55,6 +62,27 @@ matrix:
       sudo: true
       env:
         - TOXENV=.python37
+      before_script:
+        - pip uninstall requests -y
+## PYTHON 3.6
+    - python: '3.6'
+      env:
+        - TOXENV=.python36-urlfetch
+    - python: '3.6'
+      env:
+        - TOXENV=.python36-requests
+    - python: '3.6'
+      env:
+        - TOXENV=.python36-pycurl
+      before_install:
+        - sudo apt-get update
+        - sudo apt install libgnutls28-dev
+        - sudo apt install libcurl4-openssl-dev
+      before_script:
+        - pip uninstall requests -y
+    - python: '3.6'
+      env:
+        - TOXENV=.python36
       before_script:
         - pip uninstall requests -y
 
