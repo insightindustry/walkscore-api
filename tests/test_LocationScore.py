@@ -98,7 +98,7 @@ RUNTIME_DATETIME = datetime.datetime.now()
          'address': '123 Anyplace St, Anywhere, AK 12345',
          'original_latitude': 123.45,
          'original_longitude': 123.45
-    }, TypeError),
+    }, (ValueError, TypeError)),
 ])
 def test_LocationScore__init__(arguments, error):
     if arguments and not error:
