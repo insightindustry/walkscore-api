@@ -21,6 +21,7 @@ matrix:
       before_install:
         - sudo apt-get update
         - sudo apt install libgnutls28-dev
+        - sudo apt install libcurl4-openssl-dev
       before_script:
         - pip uninstall requests -y
     - python: '3.6'
